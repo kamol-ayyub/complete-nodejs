@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "learning node-express and mongodb",
   "main": "app.js",
-  "start": {
-    "start:dev": "nodemon server.js",
+  "scripts": {
+    "start": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js"
   },
   "author": "Ayyubxon-coder",
@@ -12,6 +12,7 @@
   "dependencies": {
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "mongoose": "^5.13.14",
     "morgan": "^1.10.0"
   }
 }

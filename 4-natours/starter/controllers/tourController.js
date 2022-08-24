@@ -11,16 +11,31 @@ exports.getAllTours = async (req, res) => {
     excludedFileds.forEach((el) => delete queryObj[el]);
 
     //2 advanced filtering
-
     let queryStr = JSON.stringify(queryObj);
-
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, (match) => `$${match}`);
-    console.log(JSON.parse(queryStr));
 
-    const query = await Tour.find(JSON.parse(queryStr));
+    let query = Tour.find(JSON.parse(queryStr));
 
+    //2 sorting
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(',').join(' ');
+      query = query.sort(sortBy);
+    } else {
+      query = query.sort('-createdAt');
+    }
+
+    //3 field limiting
+
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v');
+    }
+
+    //
     //execute query
-    const tours = query;
+    const tours = await query;
 
     //send response
     res.status(200).json({

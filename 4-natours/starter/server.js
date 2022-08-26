@@ -6,11 +6,15 @@ dotenv.config({
 });
 const app = require('./app');
 
+process.on('uncaughtException', (err) => {
+  console.log('uncaught exception shutting down');
+  console.log(err);
+  process.exit(1);
+});
 const DB = process.env.DATABASE.replace(
   `<PASSWORD>`,
   process.env.DATABASE_PASSWORD
 );
-
 mongoose
   //for local databases
   // .connect(process.env.DATABASE_LOCAL, {
@@ -23,4 +27,12 @@ mongoose
 
 // schema
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+const server = app.listen(port, () =>
+  console.log(`Example app listening on port ${port}!`)
+);
+process.on('unhandledRejection', (err) => {
+  console.log(err);
+  server.close(() => {
+    process.exit(1);
+  });
+});

@@ -9,6 +9,7 @@ router
 router.route('/tour-stats').get(tourController.getTourStats);
 
 router.route('/monthly-plane/:year').get(tourController.getMonthlyPlane);
+
 router
   .route(`/`)
   .get(tourController.getAllTours)
@@ -19,4 +20,5 @@ router
   .patch(tourController.updateTour)
   .get(tourController.getTour)
   .delete(tourController.deleteTour);
+
 module.exports = router;

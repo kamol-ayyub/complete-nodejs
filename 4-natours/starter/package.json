@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
     "crypto": "^1.0.1",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
@@ -24,6 +25,7 @@
     "morgan": "^1.10.0",
     "nodemailer": "^6.7.8",
     "promisify": "^0.0.3",
+    "pug": "^3.0.2",
     "slugify": "^1.6.5",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"

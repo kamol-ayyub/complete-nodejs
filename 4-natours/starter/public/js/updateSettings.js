@@ -1,6 +1,5 @@
 /* eslint-disable */
 import axios from 'axios';
-import { showAlert } from './alerts';
 
 // type is either 'password' or 'data'
 export const updateSettings = async (data, type) => {
@@ -13,13 +12,13 @@ export const updateSettings = async (data, type) => {
     const res = await axios({
       method: 'PATCH',
       url,
-      data
+      data,
     });
 
     if (res.data.status === 'success') {
-      showAlert('success', `${type.toUpperCase()} updated successfully!`);
+      console.log('success', `${type.toUpperCase()} updated successfully!`);
     }
   } catch (err) {
-    showAlert('error', err.response.data.message);
+    console.log('error', err.response.data.message);
   }
 };
